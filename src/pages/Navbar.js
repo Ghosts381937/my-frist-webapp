@@ -12,6 +12,9 @@ export default function Navbar() {
             <a href="/createcourse">
                 CreateCourse
             </a>
+            <a href="/login">
+                Login
+            </a>
         </div>
     );
 }

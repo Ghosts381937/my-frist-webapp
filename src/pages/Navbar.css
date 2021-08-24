@@ -1,6 +1,6 @@
 .Navbar {
     display: flex;
-    background-color: burlywood;
+    background-color: black;
     min-height: 50px;
     padding-left: 10vw;
     padding-right: 10vw;
@@ -8,6 +8,7 @@
     align-items: center;
   }
 a {
-  color: #2EA3F2;
+  color: white;
   font-weight: bold;
+  text-decoration: none;
 }
