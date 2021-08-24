@@ -7,7 +7,7 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json())
 
-// Route to get all posts
+// Route to get all courses
 app.get("/api/get", (req, res) => {
     db.query("SELECT * FROM courses", (err, result) => {
         if (err) {
@@ -17,7 +17,7 @@ app.get("/api/get", (req, res) => {
     });
 });
 
-// Route to get one post
+// Route to get one course
 app.get("/api/getFromName/:name", (req, res) => {
 
     const name = req.params.name;
@@ -30,7 +30,7 @@ app.get("/api/getFromName/:name", (req, res) => {
         });
 });
 
-// Route for creating the post
+// Route for creating the course
 app.post('/api/create', (req, res) => {
 
     const id = req.body.id;
@@ -47,7 +47,7 @@ app.post('/api/create', (req, res) => {
     });
 })
 
-// Route to like a post
+// Route to enroll a course
 app.post('/api/enroll/:id', (req, res) => {
 
     const id = req.params.id;
@@ -59,7 +59,7 @@ app.post('/api/enroll/:id', (req, res) => {
         res.send("enrolled");
     });
 });
-
+// Route to unenroll a course
 app.post('/api/unenroll/:id', (req, res) => {
 
     const id = req.params.id;
@@ -72,8 +72,7 @@ app.post('/api/unenroll/:id', (req, res) => {
     });
 });
 
-// Route to delete a post
-
+// Route to delete a course
 app.post('/api/delete/:id', (req, res) => {
     const id = req.params.id;
 
