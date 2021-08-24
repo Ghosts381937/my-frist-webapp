@@ -1,0 +1,13 @@
+.Navbar {
+    display: flex;
+    background-color: burlywood;
+    min-height: 50px;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    justify-content: space-between;
+    align-items: center;
+  }
+a {
+  color: #2EA3F2;
+  font-weight: bold;
+}
