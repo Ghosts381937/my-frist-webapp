@@ -1,6 +1,7 @@
 # Getting Started with this simple CRUD Project
 First,you can follow the following guide of react app to run the web client.\
-Second,excute the command `node index.js` in the sqlapi_server file so that your website can get the data through these api.
+Second,excute the command `node index.js` in the sqlapi_server file so that your website can get the data through these api.\
+Finally,dont forget to setup the sqlserver.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
