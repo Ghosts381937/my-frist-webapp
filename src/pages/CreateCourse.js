@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Axios from 'axios';
 import url from '../url';
-export default function CreateCourse() {
+export default function CreateCourse(props) {
     const [id,setId] = useState(0);
     const [name,setName] = useState("");
     const [vacancy,setVacancy] = useState(0);
@@ -10,6 +10,9 @@ export default function CreateCourse() {
         Axios.post(`${url}/api/create`,{id: parseInt(id), name: name, vacancy: parseInt(vacancy), teacher: teacher})
         .then((response) => alert("Succes!"));
     };
+    if(props.isLoggedIn === undefined) {
+        return null;
+    }
     return (
         <div className='cratePost' style={{textAlign: 'center'}}>
             <input type='text' onChange={(e) => {setId(e.target.value)}} placeholder='Id'/><br/>

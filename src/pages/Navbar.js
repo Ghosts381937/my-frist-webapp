@@ -1,6 +1,9 @@
 import React from "react";
 import './Navbar.css';
-export default function Navbar() {
+export default function Navbar(props) {
+    if(props.isLoggedIn === undefined) {
+        return null;
+    }
     return (
         <div className='Navbar'>
             <a href="/">
@@ -13,7 +16,7 @@ export default function Navbar() {
                 CreateCourse
             </a>
             <a href="/login">
-                Login
+                {props.isLoggedIn === true ? 'Logout' : 'Login'}
             </a>
         </div>
     );

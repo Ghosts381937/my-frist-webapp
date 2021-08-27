@@ -1,12 +1,14 @@
 const express = require('express');
 const db = require('./config/db')
-const cors = require('cors')
-
 const app = express();
+const cors = require('cors')
+const session = require('express-session');
 const PORT = 3002;
-app.use(cors());
+app.use(cors({origin: true,credentials: true}));
 app.use(express.json())
-
+app.use(session({
+    secret:'test'
+}));
 // Route to get all courses
 app.get("/api/get", (req, res) => {
     db.query("SELECT * FROM courses", (err, result) => {
@@ -83,7 +85,38 @@ app.post('/api/delete/:id', (req, res) => {
         res.send("deleted");
     })
 })
-
+//Route to login
+app.post('/api/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    db.query("SELECT * FROM USERS WHERE username = ? AND password = ?", [username,password], (err, result) => {
+        if(result.length > 0) {
+            req.session.loggedin = true;
+            req.session.username = username;
+            res.send("Correct!");
+            
+        }
+        else {
+            res.send("Incorrect!");
+        }
+    })
+})
+//Route to check whether user had logged in
+app.post('/api/isloggedin',(req,res) => {
+    console.log(req.session);
+    if(req.session.username) {
+        res.send('true');
+    }
+    else {
+        res.send('false');
+    }
+})
+//Route to logout
+app.post('/api/logout',(req,res) => {
+    console.log(req.session);
+    req.session.destroy();
+    res.send('Succes!');
+})
 app.listen(PORT, () => {
     if(db.connect((err) => {err ? console.log('fail') : console.log('succes')}));
     console.log(`Server is running on ${PORT}`)

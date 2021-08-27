@@ -44,7 +44,7 @@ const Delete = (id) => {
     Axios.post(`${url}/api/delete/${id}`)
     .then((response) => alert("Deleted"));
 }
-export default function CustomizedTables() {
+export default function CustomizedTables(props) {
     const classes = useStyles();
     const [courseList,setCourseList] = useState([]);
     const [courseName,setCourseName] = useState("");
@@ -65,6 +65,9 @@ export default function CustomizedTables() {
                 setCourseList(data.data);
         });
     },[])
+    if(props.isLoggedIn === undefined) {
+        return null;
+    }
     return (
         <div>
             <div className='search'>

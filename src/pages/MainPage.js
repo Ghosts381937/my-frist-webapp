@@ -1,6 +1,9 @@
 import Tables from './Table';
 import '../App.css';
-function MainPage() {
+function MainPage(props) {
+    if(props.isLoggedIn === undefined) {
+        return null;
+    }
     return (
         <Tables />
     )
