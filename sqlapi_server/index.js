@@ -89,8 +89,8 @@ app.post('/api/delete/:id', (req, res) => {
 app.post('/api/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    db.query("SELECT * FROM USERS WHERE username = ? AND password = ?", [username,password], (err, result) => {
-        if(result.length > 0) {
+    db.query("SELECT * FROM users WHERE username = ? AND password = ?", [username,password], (err, result) => {
+        if(result.length) {
             req.session.loggedin = true;
             req.session.username = username;
             res.send("Correct!");
