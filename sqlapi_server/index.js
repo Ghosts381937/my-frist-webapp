@@ -3,6 +3,7 @@ const db = require('./config/db')
 const app = express();
 const cors = require('cors')
 const session = require('express-session');
+const fs = require('fs');
 const PORT = 3002;
 app.use(cors({origin: true,credentials: true}));
 app.use(express.json())
@@ -94,7 +95,15 @@ app.post('/api/login', (req, res) => {
             req.session.loggedin = true;
             req.session.username = username;
             res.send("Correct!");
-            
+            let message = new Date().toString() + ' ' + req.session.username + ' Logged in.';
+            fs.appendFile('log.txt',message + '\n',(err) => {
+                if(err) {
+                    console.log('[ERROR] ' + new Date().toString() + ' writeFile error.');
+                }
+                else {
+                    console.log(message);
+                }
+            });
         }
         else {
             res.send("Incorrect!");
@@ -103,7 +112,6 @@ app.post('/api/login', (req, res) => {
 })
 //Route to check whether user had logged in
 app.post('/api/isloggedin',(req,res) => {
-    console.log(req.session);
     if(req.session.username) {
         res.send('true');
     }
@@ -113,7 +121,15 @@ app.post('/api/isloggedin',(req,res) => {
 })
 //Route to logout
 app.post('/api/logout',(req,res) => {
-    console.log(req.session);
+    let message = new Date().toString() + ' ' + req.session.username + ' Logged out.';
+    fs.appendFile('log.txt',message + '\n',(err) => {
+        if(err) {
+            console.log('[ERROR] ' + new Date().toString() + ' writeFile error.');
+        }
+        else {
+            console.log(message);
+        }
+    });
     req.session.destroy();
     res.send('Succes!');
 })
